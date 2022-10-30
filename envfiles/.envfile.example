@@ -1,0 +1,3 @@
+DATABASE_CONNECTION_STRING=postgresql+asyncpg://postgres:somepassword@localhost:5432/attendance
+CACHE_CONNECTION_STRING=redis://localhost:6379/0
+LOG_LEVEL=10
