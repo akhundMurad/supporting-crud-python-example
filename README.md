@@ -7,7 +7,7 @@ The purpose of this repository is to show the way of implementing supporting ent
  in the [Python programming language](https://github.com/python).
 
 
-**_Fell free to contribute!_**
+**_Feel free to contribute!_**
 
 # About sctructure of application
 ### What is supporting application?
