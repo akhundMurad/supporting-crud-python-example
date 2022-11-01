@@ -6,9 +6,8 @@ from blacksheep.server.controllers import ApiController, get
 from blacksheep.server.responses import file
 
 from src.business_logic.dto.attendance import LoadAttendanceReport
-from src.business_logic.services.attendance_report_load_service import (
-    AttendanceReportLoadService,
-)
+from src.business_logic.services.attendance_report_load_service import \
+    AttendanceReportLoadService
 
 
 class Attendance(ApiController):

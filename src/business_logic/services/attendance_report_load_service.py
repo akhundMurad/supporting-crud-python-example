@@ -1,10 +1,12 @@
 from io import BytesIO
 
 import xlsxwriter as excel
-from src.business_logic.dto.attendance import LoadAttendanceReport, ReadAttendanceReport
 
-from src.data_access.persistence.postgresql.database_client import DatabaseClient
+from src.business_logic.dto.attendance import (LoadAttendanceReport,
+                                               ReadAttendanceReport)
 from src.data_access.cache.redis.cache_client import CacheClient
+from src.data_access.persistence.postgresql.database_client import \
+    DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
 
 
@@ -24,7 +26,7 @@ class AttendanceReportLoadService:
             )
             if not excel_document:
                 statement = f"""
-                SELECT * FROM {attendance_table.name} 
+                SELECT student_id, lesson_id, participation_time, created_at FROM {attendance_table.name} 
                 WHERE student_id = :student_id AND created_at BETWEEN :start_date AND :end_date
                 """
                 attendance_list = list(
@@ -48,16 +50,14 @@ def _generate_excel_document(attendance_list: list) -> bytes:
     workbook = excel.Workbook(output)
     worksheet = workbook.add_worksheet()
 
-    row = 0
-    col = 0
+    column = 0
 
-    for attendance in attendance_list:
-        worksheet.write(row, col, attendance[0])
-        worksheet.write(row, col + 1, attendance[1])
-        worksheet.write(row, col + 2, attendance[2])
-        worksheet.write(row, col + 3, attendance[3])
-        worksheet.write(row, col + 4, attendance[4])
-        row += 1
+    for row, attendance in enumerate(attendance_list):
+        worksheet.write(row, column, attendance[0])
+        worksheet.write(row, column + 1, attendance[1])
+        worksheet.write(row, column + 2, attendance[2])
+        worksheet.write(row, column + 3, attendance[3])
+        worksheet.write(row, column + 4, attendance[4])
 
     workbook.close()
 

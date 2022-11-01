@@ -2,11 +2,12 @@ import uuid
 from datetime import datetime
 
 from blacksheep import Application
-from src.business_logic.dto.attendance import CreateAttendance
 
+from src.business_logic.dto.attendance import CreateAttendance
 from src.business_logic.services.attendance_data_create_service import \
     AttendanceDataCreateService
-from src.data_access.persistence.postgresql.database_client import DatabaseClient
+from src.data_access.persistence.postgresql.database_client import \
+    DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
 
 

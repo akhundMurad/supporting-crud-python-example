@@ -1,10 +1,10 @@
 import asyncio
+from typing import AsyncIterator
 
 import pytest
-from typing import AsyncIterator
-from redis import asyncio as aioredis
 from blacksheep import Application
 from blacksheep.testing import TestClient
+from redis import asyncio as aioredis
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from src.data_access.persistence.postgresql.tables import metadata

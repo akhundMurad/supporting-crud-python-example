@@ -1,6 +1,6 @@
 from src.business_logic.dto.attendance import CreateAttendance
-
-from src.data_access.persistence.postgresql.database_client import DatabaseClient
+from src.data_access.persistence.postgresql.database_client import \
+    DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
 
 

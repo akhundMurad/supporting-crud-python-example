@@ -1,10 +1,11 @@
 import logging
+
 from blacksheep import Application
 from blacksheep.server.openapi.v3 import OpenAPIHandler
 from openapidocs.v3 import Info
 from rodi import Services
-from src.config import LoggingConfig
 
+from src.config import LoggingConfig
 from src.di.container import get_container
 from src.presentation.api.controllers import Attendance  # noqa
 

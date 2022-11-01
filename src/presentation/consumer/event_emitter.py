@@ -11,7 +11,6 @@ class Listener(TypedDict):
     dto_type: Type[DTO]
 
 
-
 class EventEmitter:
     def __init__(self) -> None:
         self._mapping: dict[str, list[Listener]] = {}
@@ -27,7 +26,7 @@ class EventEmitter:
         for listener in listeners:
             service_type = listener["service_type"]
             dto_type = listener["dto_type"]
-            
+
             service = provider.get(service_type)
             logging.debug(
                 f"Handling event named {event_name} by service {service_type.__name__}."

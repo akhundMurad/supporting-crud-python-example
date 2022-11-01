@@ -3,17 +3,16 @@ from rodi import GetServiceContext
 from sqlalchemy.ext.asyncio import (AsyncEngine, AsyncSession,
                                     create_async_engine)
 from sqlalchemy.orm import sessionmaker
-from src.business_logic.dto.attendance import CreateAttendance
 
+from src.business_logic.dto.attendance import CreateAttendance
 from src.business_logic.services.attendance_data_create_service import \
     AttendanceDataCreateService
 from src.business_logic.services.attendance_report_load_service import \
     AttendanceReportLoadService
-from src.data_access.persistence.postgresql.database_client import DatabaseClient
-from src.data_access.cache.redis.cache_client import CacheClient
 from src.config import CacheConfig, DatabaseConfig, LoggingConfig
 from src.data_access.cache.redis.cache_client import CacheClient
-from src.data_access.persistence.postgresql.database_client import DatabaseClient
+from src.data_access.persistence.postgresql.database_client import \
+    DatabaseClient
 from src.presentation.consumer.event_emitter import EventEmitter, Listener
 
 
@@ -80,6 +79,8 @@ def build_event_emitter(context: GetServiceContext) -> EventEmitter:
     ee = EventEmitter()
     ee.bind(
         event_type="attendance-created",
-        listener=Listener(service_type=AttendanceDataCreateService, dto_type=CreateAttendance)
+        listener=Listener(
+            service_type=AttendanceDataCreateService, dto_type=CreateAttendance
+        ),
     )
     return ee

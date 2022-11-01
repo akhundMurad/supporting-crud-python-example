@@ -4,8 +4,9 @@ from datetime import datetime
 import pytest
 from blacksheep import Application
 
+from src.data_access.persistence.postgresql.database_client import \
+    DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
-from src.data_access.persistence.postgresql.database_client import DatabaseClient
 
 
 async def test_database_client_rollback(asgi: Application) -> None:
