@@ -4,8 +4,8 @@ import logging
 
 from redis import asyncio as aioredis
 from rodi import Services
-from src.config import LoggingConfig
 
+from src.config import LoggingConfig
 from src.di.container import get_container
 from src.presentation.consumer.event_emitter import EventEmitter
 
