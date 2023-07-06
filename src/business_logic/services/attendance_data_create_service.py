@@ -1,6 +1,5 @@
 from src.business_logic.dto.attendance import CreateAttendance
-from src.data_access.persistence.postgresql.database_client import \
-    DatabaseClient
+from src.data_access.persistence.postgresql.database_client import DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
 
 
@@ -11,7 +10,7 @@ class AttendanceDataCreateService:
     async def execute(self, attendance: CreateAttendance) -> None:
         async with self._db as db:
             statement = f"""
-            INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at) 
+            INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at)
             VALUES(:external_id, :student_id, :lesson_id, :participation_time, :created_at)
             """
             await db.execute(

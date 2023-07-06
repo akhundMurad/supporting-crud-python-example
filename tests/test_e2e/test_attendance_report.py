@@ -7,16 +7,12 @@ from blacksheep import Application
 from blacksheep.testing import TestClient
 
 
-async def test_attendance_report_without_data(
-    asgi: Application, test_client: TestClient
-) -> None:
+async def test_attendance_report_without_data(asgi: Application, test_client: TestClient) -> None:
     student_id = uuid4()
     start_date = date(2022, 10, 10)
     end_date = date(2022, 10, 10)
 
-    response = await test_client.get(
-        f"/api/attendance/{student_id}/{start_date}/{end_date}"
-    )
+    response = await test_client.get(f"/api/attendance/{student_id}/{start_date}/{end_date}")
 
     assert response.status == 200
     assert response.content.length

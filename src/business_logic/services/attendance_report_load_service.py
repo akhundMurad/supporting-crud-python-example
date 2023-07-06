@@ -2,31 +2,25 @@ from io import BytesIO
 
 import xlsxwriter as excel
 
-from src.business_logic.dto.attendance import (LoadAttendanceReport,
-                                               ReadAttendanceReport)
+from src.business_logic.dto.attendance import LoadAttendanceReport, ReadAttendanceReport
 from src.data_access.cache.redis.cache_client import CacheClient
-from src.data_access.persistence.postgresql.database_client import \
-    DatabaseClient
+from src.data_access.persistence.postgresql.database_client import DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
 
 
 class AttendanceReportLoadService:
-    def __init__(
-        self, database_client: DatabaseClient, cache_client: CacheClient
-    ) -> None:
+    def __init__(self, database_client: DatabaseClient, cache_client: CacheClient) -> None:
         self._db = database_client
         self._cache_client = cache_client
 
-    async def execute(
-        self, report_params: LoadAttendanceReport
-    ) -> ReadAttendanceReport:
+    async def execute(self, report_params: LoadAttendanceReport) -> ReadAttendanceReport:
         async with self._db as db:
             excel_document = await self._cache_client.get(
                 f"attendance_report_{report_params.student_id}_{report_params.start_date}_{report_params.end_date}"
             )
             if not excel_document:
                 statement = f"""
-                SELECT student_id, lesson_id, participation_time, created_at FROM {attendance_table.name} 
+                SELECT student_id, lesson_id, participation_time, created_at FROM {attendance_table.name}
                 WHERE student_id = :student_id AND created_at BETWEEN :start_date AND :end_date
                 """
                 attendance_list = list(

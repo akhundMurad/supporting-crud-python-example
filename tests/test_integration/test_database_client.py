@@ -4,8 +4,7 @@ from datetime import datetime
 import pytest
 from blacksheep import Application
 
-from src.data_access.persistence.postgresql.database_client import \
-    DatabaseClient
+from src.data_access.persistence.postgresql.database_client import DatabaseClient
 from src.data_access.persistence.postgresql.tables import attendance_table
 
 
@@ -17,10 +16,9 @@ async def test_database_client_rollback(asgi: Application) -> None:
 
     with pytest.raises(SomeException):
         async with database_client as db:
-
             await db.execute(
                 f"""
-                INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at) 
+                INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at)
                 VALUES(:external_id, :student_id, :lesson_id, :participation_time, :created_at)
                 """,
                 **dict(
@@ -44,10 +42,9 @@ async def test_database_client_without_commit(asgi: Application) -> None:
     database_client = asgi.service_provider.get(DatabaseClient)
 
     async with database_client as db:
-
         await db.execute(
             f"""
-            INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at) 
+            INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at)
             VALUES(:external_id, :student_id, :lesson_id, :participation_time, :created_at)
             """,
             **dict(
@@ -67,10 +64,9 @@ async def test_database_client_commit(asgi: Application) -> None:
     database_client = asgi.service_provider.get(DatabaseClient)
 
     async with database_client as db:
-
         await db.execute(
             f"""
-            INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at) 
+            INSERT INTO {attendance_table.name}(external_id, student_id, lesson_id, participation_time, created_at)
             VALUES(:external_id, :student_id, :lesson_id, :participation_time, :created_at)
             """,
             **dict(

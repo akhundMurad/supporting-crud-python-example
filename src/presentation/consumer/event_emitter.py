@@ -28,7 +28,5 @@ class EventEmitter:
             dto_type = listener["dto_type"]
 
             service = provider.get(service_type)
-            logging.debug(
-                f"Handling event named {event_name} by service {service_type.__name__}."
-            )
+            logging.debug(f"Handling event named {event_name} by service {service_type.__name__}.")
             await service.execute(dto_type(**message["payload"]))
