@@ -1,5 +1,5 @@
 
-# Example of supporting application on Python
+# Example of the supporting application on Python
 
 Inspired by [Eric Evans](https://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215) and [Vladik Khononov's](https://www.amazon.com/Learning-Domain-Driven-Design-Aligning-Architecture/dp/1098100131) books.
 
@@ -8,9 +8,9 @@ The purpose of this repository is to show the way of implementing supporting ent
 
 **_Feel free to contribute!_**
 
-# About sctructure of application
+# About the application structure
 
-### What is supporting application?
+**What is the supporting application?**
 
 A domain is consists of multiple subdomains. Each subdomain corresponds to a different part of the business.
 According to Domain Driven Design there are 3 types of subdomains:
@@ -21,45 +21,53 @@ According to Domain Driven Design there are 3 types of subdomains:
 
 Usually, to implement core applications, developers use complex patterns (such as Aggregate, CQRS, Event Sourcing and so on), but for supporting applications there is no need to do so. We can use much simpler patterns, such as [Transaction Script](https://martinfowler.com/eaaCatalog/transactionScript.html) for domain layer.
 
-# Run Locally
+# Run on local machine
 
-1. Clone the project
+1. Clone the project:
 
-  ```bash
-    git clone https://github.com/akhundMurad/supporting-crud-python-example.git
-  ```
+    ```bash
+      git clone https://github.com/akhundMurad/supporting-crud-python-example.git
+    ```
 
-2. Setup environment variables ([example](envfiles/.envfile.example))
+2. Setup environment variables ([example](envfiles/.envfile.example)).
 
-3. Install Poetry
+3. [Install Poetry package manager](https://python-poetry.org/docs/):
 
-  ```bash
-    curl -sSL https://install.python-poetry.org | python3 -
-  ```
+    ```bash
+      curl -sSL https://install.python-poetry.org | python3 -
+    ```
 
-4. Setup poetry config
+4. Setup poetry config:
 
-  ```bash
-    poetry config virtualenvs.in-project true
-  ```
+    ```bash
+      poetry config virtualenvs.in-project true
+    ```
 
-5. Install dependencies
+5. Set environment in VSCode:
 
-  ```bash
-    poetry install
-  ```
+    Click <kbd>CTRL</kbd> + <kbd>SHIFT</kbd> + <kbd>P</kbd>
 
-6. Apply migrations
+    And then select virtual environment:
 
-  ```bash
-    poetry run alembic upgrade head
-  ```
+    ![Select Venv](/assets/select_venv.png)
 
-7. Start the server
+6. Install dependencies:
 
-  ```bash
-    uvicorn src.presentation.api.asgi:asgi
-  ```
+    ```bash
+      poetry install
+    ```
+
+7. Apply migrations:
+
+    ```bash
+      poetry run alembic upgrade head
+    ```
+
+8. Start the server:
+
+    ```bash
+      uvicorn src.presentation.api.asgi:asgi
+    ```
 
 # Links
 
